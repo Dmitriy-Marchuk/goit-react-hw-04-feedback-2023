@@ -1,6 +1,9 @@
 import React from 'react';
-import Controls from './Controls';
-import Statistics from './Statistics';
+import Controls from './Controls/Controls';
+import Statistics from './Statistic/Statistics';
+import Notification from './Notification/Notification';
+import Section from './Section/Section';
+import { StyledFeedback } from './Feedback.styled';
 
 class Feedback extends React.Component {
     state = {
@@ -30,18 +33,23 @@ class Feedback extends React.Component {
   };
 
   render() {
-      return (
-          <section>
-            <Controls title='Please leave feedback' options={this.state} onBtnLeaveFeedback={this.handleIncrement} />
-            <section title='Statistics'>
-                <Statistics
-                  countPositive={this.countPositiveFeedbackPercentage().toFixed(1)}
+    return (
+      <StyledFeedback>
+      <Section  title='Please leave feedback'>
+        <Controls options={this.state} onBtnLeaveFeedback={this.handleIncrement} />
+      </Section>
+      <Section title='Statistics'>
+        {this.totalCount() === 0 ? (
+              <Notification message="No feedback given" />) :
+              (<Statistics
+                  countPositive={this.countPositiveFeedbackPercentage() || 0}
                   countTotal={this.countTotalFeedback()}
                   goodFeedback={this.state.good}
                   neutralFeedback={this.state.neutral}
-                  badFeedback={this.state.bad} />
-            </section>
-          </section>
+                  badFeedback={this.state.bad}
+              />)
+            }
+      </Section></StyledFeedback>
       )
   }
 }
