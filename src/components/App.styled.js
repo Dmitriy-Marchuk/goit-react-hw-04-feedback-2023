@@ -6,7 +6,7 @@ export const AppContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  font-size: 40px;
+  font-size: 25px;
   color: #010101;
   padding: 30px;
 `;
